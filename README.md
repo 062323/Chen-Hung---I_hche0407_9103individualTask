@@ -1,6 +1,6 @@
 # Chen-Hung-I_hche0407_9103individualTask
 ## Individual Task Inspiration
->Choosen method：Perlin noise and randomness  
+>Choosen method：__'Perlin noise and randomness'__  
 
 ![1-1](asset/Part1-1.png)
 ![1-2](asset/Part1-2.png)
@@ -45,6 +45,25 @@ The secound part of code will keep `update()` and `show()` in the `class Particl
 ![8](asset/c6-2.png)  
 The third part of the code will create a new point from one of the point from edgePoints[] per frame, and feed this point's coordinates to `class Particle`.  
 ![9](asset/c6-3.png)  
-5. In `class Particle`, first I construct figures for every single particle with the 
+5. In `class Particle`, first I construct figures for every single particle with the x, y value I pass down from the previous step.  
+![10](asset/c7-1.png)  
+The `finished()` function will return to the secound part of the code in `draw()` when the particle's transparency is less than 0.  
+![11](asset/c7-2.png)  
+The `update()` function keeps update the movement, transparency, and colour of the particle.  
+![12](asset/c7-3.png)  
+The `show()` function draws the particle with all the values I declared and updated above.  
+![13](asset/c7-4.png)  
+With all the methods above, I can generate multiple particles from the edge of the 3 shapes with random radius, and the colour of the particle will change while it is moving base on its y coordinate to let the colour of that particle matches the colour of the building.  
+
+## Uniqueness  
+I add the particle system to the group code to mimic the point cloud effect, while the other two team members used Audio and Times to change the waves and add rain effects.  
+
+## Reference  
+[The Coding Train. (2018). Coding Challenge #78: Simple Particle System. 
+](https://www.youtube.com/watch?v=UcdigVaIYAk)  
+>I learned how to create class Particle with this tutorial by The Coding Train  
+Tool used ：Chatgpt  
+>I use Chatgpt to learned the idea of generating particles at the interpolate points of the shape's edge.
+
 
 
