@@ -17,7 +17,7 @@ Upon opening, the particles will start emerging from the edge of the buildings, 
 1. To make the wave moved, first I remove the __'noLoop()'__ from __'setup()'__so the loop will not be stop upon refresh.  
 2. I add an public array to store the waves.
 >let waves = []; // Set up waves array to store waves
-3. Add function setWaves() to give the waves initial settings.
+3. Add function setWaves() to give the waves initial settings.  
  function setWaves() {
   waveCount = windowHeight / 40;
   waves = []; // Clear existing waves in case of resize
