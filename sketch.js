@@ -12,18 +12,19 @@ function setup() {
   setWaves();// call setWaves function
   randomSeed(99);
   drawBuilding();// call drawBuilding() for one time to setup the parameters
-  // Convert shape points to vectors and interpolate points
-  for (let shape of shapes) {
-    let vertices = shape.map(pt => createVector(pt.x, pt.y));// pt = the elements in the shapes array, "=>" will map the { x: 0, y: 450 } to (pt.x, pt.y)
-    // Now I got the vertex of all the shapes, I want to generate some interpolate points between each 2 vertices
+
+  // Convert shape points coordinates to vectors and interpolate points
+  for (let shape of shapes) { // for each shape of the 3 shapes
+    // pt = the elements in the shapes array, "=>" will map the { x: 0, y: 450 } to (pt.x, pt.y)
+    let vertices = shape.map(pt => createVector(pt.x, pt.y));
+    // Now I got all the vector of the 3 shapes, I want to generate some interpolate points between each 2 vertices
     for (let i = 0; i < vertices.length; i++) {
       let start = vertices[i]; //start from vertex number i
-      let end = vertices[(i + 1) % vertices.length]; // end from vertex number i+1, using % modulus to make sure that i+1 will back to the beginning of vertices[] when i+1 is > vertices's length
+      // end from vertex number i+1, using % modulus to make sure that i+1 will back to the beginning of vertices[] when i+1 is > vertices's length
+      let end = vertices[(i + 1) % vertices.length];
       interpolatePoints(start, end, 1000); // Feed the figures to interpolatePoints()
     }
   }
-
-
 }
 
 function draw() {
@@ -40,17 +41,15 @@ function draw() {
 
   // This loop will keep going as long as there are still particle left in the particles array 
   for (let i = particles.length - 1; i >= 0; i--) {
-    particles[i].update(); // call update
-    particles[i].show(); //call show
+    particles[i].update(); // call update() class Particle
+    particles[i].show(); //call show() in class Particle
     //if the particle finish display
     if (particles[i].finished()) {
       particles.splice(i, 1);//splice(number i of the array, 1) remove 1 element from number i of the array
     }
   }
 
-
-
-  let pt = random(edgePoints);//Create a parameter "pt" which is one of the point from edgePoints[]
+  let pt = random(edgePoints);//Create a point "pt" which is one of the point from edgePoints[]
   particles.push(new Particle(pt.x, pt.y));// Feed this point's coordinates to Particle class
 
   drawWave();
@@ -65,9 +64,8 @@ function interpolatePoints(start, end, numPoints) {
     let y = lerp(start.y, end.y, t); // lerp the x value of the edgePoints I want to create between start.y and end.y by t
     edgePoints.push(createVector(x, y));// push the new point(edgePoints) I create into the array edgePoints
   }
-
-
 }
+//Reference：I use Chatgpt to generated the idea of interpolatePoints
 
 //Particle system class
 class Particle {
@@ -86,10 +84,11 @@ class Particle {
     this.b = map(this.y, 450, 19, 0, 112);//map the particle's b value from 0~112 according to its y position
   }
 
-  //return when particle finish display (it's transparency < 0)
+  //return when particle finish display (it's transparency < 0) 
   finished() {
     return this.alpha < 0;
   }
+
   //update the particle movement
   update() {
     this.x += this.vx;
@@ -282,6 +281,7 @@ function setWaves() {
     let randomFrequency = random(0.01, 0.05); // The random frequency of the wave.
     let c1 = lerpColor(color(62, 192, 204), color(0, 0, 0), i / waveCount); //The starting color of the wave gradient.
     let c2 = lerpColor(color(62, 192, 204), color(0, 0, 0), (i + 1) / waveCount); //The ending color of the wave gradient.
+    //reference | p5.js. (n.d.). P5js.org. https://p5js.org/reference/#/p5/lerpColor
 
     //adds a new wave object to the waves array.
     waves.push({
